@@ -1,9 +1,9 @@
-def call(String project, String ImageTag, String hubUser){
+def call(String project, String ImageTag, String dockerHubUser){
     withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                     sh 'docker login -u surjeetcse -p ${dockerhubpwd}'
+                     sh 'docker login -u ${dockerHubUser} -p ${dockerhubpwd}'
     }   
-    sh "docker image push ${hubUser}/${project}:${ImageTag}"
-    sh "docker image push ${hubUser}/${project}:latest"   
+    sh "docker image push ${dockerHubUser}/${project}:${ImageTag}"
+    sh "docker image push ${dockerHubUser}/${project}:latest"   
 }
 
 
